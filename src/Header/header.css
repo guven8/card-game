@@ -45,7 +45,7 @@
     opacity: 1;
 }
 
-.app-header .submit-game-options.disabled {
+.app-header .submit-game-options:disabled {
     opacity: 0;
 }
 

@@ -8,7 +8,7 @@ import './header.css';
 class Header extends PureComponent {
   constructor() {
     super();
-    this.state = { _numOfPlayers: 0, _numOfCards: 0, error: false, errorMsg: null };
+    this.state = { _numOfPlayers: 0, _numOfCards: 0, error: false, errorMsg: null, optionsSubmitted: false };
   }
 
   componentWillMount() {
@@ -16,7 +16,7 @@ class Header extends PureComponent {
   }
 
   updateNumOfPlayers = (e) => {
-    this.setState({ error: false, errorMsg: null });
+    this.setState({ error: false, errorMsg: null, optionsSubmitted: false});
     const _numOfPlayers = e.target.value;
     this.setState({ _numOfPlayers });
 
@@ -28,7 +28,7 @@ class Header extends PureComponent {
   }
 
   updateNumOfCards = (e) => {
-    this.setState({ error: false, errorMsg: null })
+    this.setState({ error: false, errorMsg: null, optionsSubmitted: false});
     const { _numOfPlayers } = this.state;
     const _numOfCards = +e.target.value;
     const maxCardsAvailable = Math.floor(52 / _numOfPlayers);
@@ -49,19 +49,17 @@ class Header extends PureComponent {
     if (!this.state.error) {
       this.props.chooseNumOfCards({ numOfCards });
       this.props.chooseNumOfPlayers({ numOfPlayers });
+      this.setState({ optionsSubmitted: true });
     }
   }
 
   render() {
-    const { error, errorMsg, _numOfPlayers, _numOfCards } = this.state;
+    const { error, errorMsg, _numOfPlayers, _numOfCards, optionsSubmitted } = this.state;
     const gameOptionsFormCards = classNames({
       'game-options-form cards': true,
       disabled: !_numOfPlayers && !error
     });
-    const submitButton = classNames({
-      'submit-game-options': true,
-      disabled: !_numOfPlayers || !_numOfCards || error
-    })
+    const submitDisabled = !_numOfPlayers || !_numOfCards || error ||optionsSubmitted;
     return (
       <div className="app-header">
         <h2>Welcome to World’s Simplest Poker</h2>
@@ -74,7 +72,12 @@ class Header extends PureComponent {
             <label htmlFor="choose-cards-input">Choose Number Of Cards To Be Dealt</label>
             <input type="number" id="choose-cards-input" onChange={this.updateNumOfCards}/>
           </div>
-          <button className={submitButton} onClick={this.submitOptions}>submit</button>
+          <button
+            disabled={submitDisabled}
+            className="submit-game-options"
+            onClick={this.submitOptions}>
+            submit
+          </button>
           {error ? <span className="error">{errorMsg}</span> : null }
         </div>
       </div>
