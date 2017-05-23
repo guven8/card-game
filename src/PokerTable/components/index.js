@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PlayersDeck from './PlayersDeck';
 import { actions as cardDealer } from '../../cardDealer/index';
+import * as actions from '../module/actions';
 import '../pokerTable.css';
 
 class PokerTable extends PureComponent {
@@ -14,17 +15,29 @@ class PokerTable extends PureComponent {
     });
   }
 
+  playAgain = () => {
+    this.props.shuffleDeck();
+    this.dealCards();
+  }
+
   render() {
     const { numOfPlayers, numOfCards, dealtCards } = this.props;
     if (!numOfPlayers || !numOfCards) {
       return null;
     }
-
+    const cardsDealt = dealtCards.length > 1;
+    if (cardsDealt) {
+      this.props.getWinner({ dealtCards });
+    }
     return (
       <div className="poker-table">
         <div className="intro">
-          <span className="title">Ready ?</span>
-          <button className="deal-cards" onClick={this.dealCards}>Reveal Cards</button>
+          <span className="title">{cardsDealt ? 'Play Again ?' : 'Ready ?'}</span>
+          {!cardsDealt ?
+            <button className="deal-cards" onClick={this.dealCards}>Deal Cards</button>
+            :
+            <button className="deal-cards" onClick={this.playAgain}>Replay</button>
+          }
         </div>
         <div className="card-container">
           {dealtCards.map((playersDeck, i) =>
@@ -49,5 +62,7 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
+  getWinner: actions.getWinner,
+  shuffleDeck: cardDealer.shuffleDeck,
   dealCards: cardDealer.dealCards
 })(PokerTable);

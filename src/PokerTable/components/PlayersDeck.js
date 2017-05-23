@@ -1,36 +1,52 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import { isEqual } from 'lodash';
 import Card from './Card';
-import * as actions from '../module/actions';
 
 class PlayersDeck extends PureComponent {
-  sortCards = (deck) => {
-    const orderedSuits = [ 'hearts', 'spades', 'diamonds', 'clubs' ];
-    return deck.sort((a, b) =>
-      orderedSuits.indexOf(a.suit) > orderedSuits.indexOf(b.suit)
-    )
+  componentWillReceiveProps(nextProps) {
+    if (!isEqual(this.props.playersDeck, nextProps.playersDeck)) {
+      this.sortCards(nextProps.playersDeck);
+    }
   }
 
-  componentDidMount() {
-    const { playersDeck } = this.props;
-    this.props.getWinner({ dealtCards: playersDeck });
+  componentWillMount() {
+    this.sortCards(this.props.playersDeck)
+  }
+
+  sortCards = (deck) => {
+    const orderedSuits = [ 'hearts', 'spades', 'diamonds', 'clubs' ];
+    const orderedDeck = deck.sort((a, b) =>
+      orderedSuits.indexOf(a.suit) > orderedSuits.indexOf(b.suit)
+    )
+    this.getPlayersCards(orderedDeck);
+  }
+
+  getPlayersCards = (deck) => {
+    let totalScore = 0;
+    const cards = deck.map(card => {
+      totalScore += card.value;
+      return (
+        <Card
+          key={card.id}
+          num={card.num}
+          suit={card.suit}
+          value={card.value}
+        />
+      )
+    });
+    this.cards = cards
+    this.totalScore = totalScore;
   }
 
   render() {
-    const { playersDeck, playerNum, winner } = this.props;
-    const orderedDeck = this.sortCards(playersDeck);
+    const { playerNum, winner } = this.props;
     return (
       <div className="players-deck">
         <span className="player-num">Player: {playerNum}</span>
         {winner === playerNum ? <span className="winner">Winner</span> : null }
-        {orderedDeck.map(card =>
-          <Card
-            key={card.id}
-            num={card.num}
-            suit={card.suit}
-            value={card.value}
-          />
-        )}
+        <span className="total-score">Total Score: {this.totalScore}</span>
+        {this.cards}
       </div>
     );
   }
@@ -41,6 +57,4 @@ const mapStateToProps = (state) => {
   return { winner };
 };
 
-export default connect(mapStateToProps, {
-  getWinner: actions.getWinner
-})(PlayersDeck);
+export default connect(mapStateToProps)(PlayersDeck);

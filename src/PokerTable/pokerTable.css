@@ -1,8 +1,9 @@
 .poker-table {
     width: 100%;
+    max-width: 1680px;
+    margin: 0 auto;
     height: 100%;
     padding: 50px;
-    border: 1px solid black;
 }
 
 .poker-table .intro {
@@ -78,6 +79,7 @@
     align-items: center;
     justify-content: center;
     position: relative;
+    padding: 23px;
 }
 
 .poker-table .players-deck .player-num {
@@ -95,7 +97,9 @@
     right: 20px;
 }
 
-.poker-table .card .num {
+.poker-table .players-deck .total-score {
+    width: 100px;
+    position: absolute;
+    bottom: 20px;
+    left: calc(50% - 50px);
 }
-
-.poker-table .card .suit {}

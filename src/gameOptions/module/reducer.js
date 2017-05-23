@@ -19,6 +19,11 @@ export default (state = initialState, action) => {
         numOfCards: action.numOfCards
       }
     }
+    case a.RESET_GAME: {
+      return {
+        ...initialState
+      }
+    }
     default:
       return state;
   }
