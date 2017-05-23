@@ -1,0 +1,32 @@
+.poker-table {
+    width: 100%;
+    height: 100%;
+    padding: 50px;
+    border: 1px solid black;
+}
+
+.poker-table .card-container {
+    display: flex;
+    flex-flow: row wrap;
+    flex-shrink: 0;
+}
+
+.poker-table .card {
+    min-width: 100px;
+    min-height: 150px;
+    margin: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.poker-table .card .num {
+    /*position: absolute;*/
+    /*top: 20px;*/
+    /*left: 20px;*/
+}
+
+.poker-table .card .suit {}

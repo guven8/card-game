@@ -1,8 +1,8 @@
 import * as a from './actionsTypes';
 
 const initialState = {
-  noOfPlayers: null,
-  noOfCards: null
+  numOfPlayers: null,
+  numOfCards: null
 }
 
 export default (state = initialState, action) => {
@@ -10,13 +10,13 @@ export default (state = initialState, action) => {
     case a.CHOOSE_NUM_OF_PLAYERS: {
       return {
         ...state,
-        noOfPlayers: action.noOfPlayers
+        numOfPlayers: action.numOfPlayers
       }
     }
     case a.CHOOSE_NUM_OF_CARDS: {
       return {
         ...state,
-        noOfCards: action.noOfCards
+        numOfCards: action.numOfCards
       }
     }
     default:
