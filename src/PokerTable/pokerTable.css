@@ -52,19 +52,19 @@
 }
 
 .poker-table .card .suit.hearts {
-    background: url('./images/hearts.png') center center / cover no-repeat;
+    background: url('./images/hearts.png') center center / contain no-repeat;
 }
 
 .poker-table .card .suit.spades {
-    background: url('./images/spades.png') center center / cover no-repeat;
+    background: url('./images/spades.png') center center / contain no-repeat;
 }
 
 .poker-table .card .suit.diamonds {
-    background: url('./images/diamonds.png') center center / cover no-repeat;
+    background: url('./images/diamonds.png') center center / contain no-repeat;
 }
 
 .poker-table .card .suit.clubs {
-    background: url('./images/clubs.png') center center / cover no-repeat;
+    background: url('./images/clubs.png') center center / contain no-repeat;
 }
 
 .poker-table .players-deck {
@@ -84,8 +84,8 @@
 
 .poker-table .players-deck .player-num {
     position: absolute;
-    top: 20px;
-    left: 20px;
+    top: 10px;
+    left: 10px;
 }
 
 .poker-table .players-deck .winner {
@@ -93,13 +93,13 @@
     font-size: 20px;
     font-weight: bold;
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 5px;
+    right: 10px;
 }
 
 .poker-table .players-deck .total-score {
-    width: 100px;
+    width: auto;
     position: absolute;
-    bottom: 20px;
+    bottom: 10px;
     left: calc(50% - 50px);
 }
