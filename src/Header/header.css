@@ -1,14 +1,15 @@
-.App-header {
+.app-header {
     background-color: #222;
     height: 180px;
     padding: 10px 20px;
     color: white;
 }
 
-.App-header .input-options {
+.app-header .input-options {
     margin: 0 auto;
+    padding: 5px;
     width: 430px;
-    height: 60px;
+    height: 100px;
     display: flex;
     flex-flow: column nowrap;
     align-items: flex-start;
@@ -16,30 +17,40 @@
     position: relative;
 }
 
-.App-header .game-options-form {
+.app-header .game-options-form {
     transition: opacity 0.4s;
 }
 
-.App-header .game-options-form.players,
-.App-header .game-options-form.cards {
+.app-header .game-options-form.players,
+.app-header .game-options-form.cards {
     display: flex;
     width: 100%;
     justify-content: space-between;
     opacity: 1;
 }
 
-.App-header .game-options-form.disabled  {
+.app-header .game-options-form.disabled  {
     opacity: 0;
 }
 
-.App-header .game-options-form input {
+.app-header .game-options-form input {
     margin: 0 10px;
     border-radius: 3px;
     border: none;
 }
 
-.App-header .error {
+.app-header .submit-game-options {
+    margin: 0 auto;
+    transition: opacity 0.4s;
+    opacity: 1;
+}
+
+.app-header .submit-game-options.disabled {
+    opacity: 0;
+}
+
+.app-header .error {
     color: red;
     position: absolute;
-    bottom: -30px;
+    bottom: 0px;
 }

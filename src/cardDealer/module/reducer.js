@@ -3,7 +3,8 @@ import { shuffle } from 'lodash';
 import { getDeckOfCards } from './utils'
 
 const initialState = {
-  deckOfCards: getDeckOfCards()
+  deckOfCards: getDeckOfCards(),
+  dealtCards: []
 }
 
 export default (state = initialState, action) => {
@@ -13,7 +14,12 @@ export default (state = initialState, action) => {
         ...state,
         deckOfCards: shuffle(state.deckOfCards)
       }
+    case a.DEAL_CARDS:
+      return {
+        ...state,
+        dealtCards: action.dealtCards
+      }
     default:
       return state;
   }
-}
+};

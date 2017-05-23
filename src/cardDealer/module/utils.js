@@ -1,5 +1,6 @@
 import * as c from './constants';
 import uuid from 'uuid';
+import { chunk } from 'lodash';
 
 export const getDeckOfCards = () => {
   const deck = [];
@@ -14,10 +15,20 @@ export const getDeckOfCards = () => {
     }
   }
   return deck;
-}
+};
 
 const getCardValue = (cardNum, cardSuit) => {
   const cardNumValue = c.CARD_NUMS.indexOf(cardNum) + 1;
-  const cardSuitValue = c.CARD_SUITS.indexOf(cardSuit) + 1;
-  return cardNumValue + cardSuitValue;
-}
+  // const cardSuitValue = c.CARD_SUITS.indexOf(cardSuit) + 1;
+  return cardNumValue// + cardSuitValue;
+};
+
+export const getDealtCards = (cards, numOfPlayers, numOfCards) => {
+  const totalNumCards = +numOfPlayers * +numOfCards;
+  var cardsToBeDealt = [];
+  for (let i = 0; i < totalNumCards; i++) {
+      cardsToBeDealt.push(cards[i])
+  }
+  // console.log(cards, numOfPlayers, numOfCards, cardsToBeDealt);
+  return chunk(cardsToBeDealt, numOfCards);
+};
