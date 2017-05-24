@@ -9,18 +9,12 @@ export const getDeckOfCards = () => {
       deck.push({
         num: c.CARD_NUMS[v],
         suit: c.CARD_SUITS[s],
-        value: getCardValue(c.CARD_NUMS[v], c.CARD_SUITS[s]),
+        value: c.CARD_NUMS.indexOf(c.CARD_NUMS[v]) + 1,
         id: uuid.v4()
       });
     }
   }
   return deck;
-};
-
-const getCardValue = (cardNum, cardSuit) => {
-  const cardNumValue = c.CARD_NUMS.indexOf(cardNum) + 1;
-  // const cardSuitValue = c.CARD_SUITS.indexOf(cardSuit) + 1;
-  return cardNumValue// + cardSuitValue;
 };
 
 export const getDealtCards = (cards, numOfPlayers, numOfCards) => {
@@ -29,6 +23,19 @@ export const getDealtCards = (cards, numOfPlayers, numOfCards) => {
   for (let i = 0; i < totalNumCards; i++) {
       cardsToBeDealt.push(cards[i])
   }
-  // console.log(cards, numOfPlayers, numOfCards, cardsToBeDealt);
   return chunk(cardsToBeDealt, numOfCards);
+};
+
+export const determineWinner = (dealtCards) => {
+  const playerPoints = [];
+  dealtCards.forEach(card => {
+    let points = 0;
+    for (let i = 0; i < card.length; i++) {
+      points += +card[i].value;
+    }
+    playerPoints.push(points);
+  });
+  const highestPoints = Math.max.apply(Math, playerPoints);
+  const winner = playerPoints.indexOf(highestPoints);
+  return winner + 1;
 };

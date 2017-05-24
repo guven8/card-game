@@ -7,21 +7,11 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case a.CHOOSE_NUM_OF_PLAYERS: {
+    case a.SUBMIT_GAME_OPTIONS: {
       return {
         ...state,
+        numOfCards: action.numOfCards,
         numOfPlayers: action.numOfPlayers
-      }
-    }
-    case a.CHOOSE_NUM_OF_CARDS: {
-      return {
-        ...state,
-        numOfCards: action.numOfCards
-      }
-    }
-    case a.RESET_GAME: {
-      return {
-        ...initialState
       }
     }
     default:

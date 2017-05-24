@@ -1,15 +1,9 @@
 import * as a from './actionsTypes';
 
-export const chooseNumOfPlayers = ({numOfPlayers} = {}) => ({
-  type: a.CHOOSE_NUM_OF_PLAYERS,
+export const submitGameOptions = (
+  { numOfCards, numOfPlayers } = {}
+  ) => ({
+  type: a.SUBMIT_GAME_OPTIONS,
+  numOfCards,
   numOfPlayers
-});
-
-export const chooseNumOfCards = ({numOfCards} = {}) => ({
-  type: a.CHOOSE_NUM_OF_CARDS,
-  numOfCards
-});
-
-export const resetGame = () => ({
-  type: a.RESET_GAME
 });

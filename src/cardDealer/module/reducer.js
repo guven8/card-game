@@ -4,7 +4,8 @@ import { getDeckOfCards } from './utils'
 
 const initialState = {
   deckOfCards: getDeckOfCards(),
-  dealtCards: []
+  dealtCards: [],
+  winner: null
 }
 
 export default (state = initialState, action) => {
@@ -18,6 +19,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         dealtCards: action.dealtCards
+      }
+    case a.GET_WINNER:
+      return {
+        ...state,
+        winner: action.winner
       }
     default:
       return state;

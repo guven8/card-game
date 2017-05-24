@@ -53,7 +53,7 @@ class PlayersDeck extends PureComponent {
 }
 
 const mapStateToProps = (state) => {
-  const { pokerTable: { winner } } = state;
+  const { cardDealer: { winner } } = state;
   return { winner };
 };
 
