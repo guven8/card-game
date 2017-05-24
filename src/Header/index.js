@@ -17,7 +17,7 @@ class Header extends PureComponent {
 
   updateNumOfPlayers = (e) => {
     this.setState({ error: false, errorMsg: null, optionsSubmitted: false});
-    const _numOfPlayers = +e.target.value > 0 ? +e.target.value : 0;
+    const _numOfPlayers = +e.target.value;
     this.setState({ _numOfPlayers });
     this.validateForm(_numOfPlayers, this.state._numOfCards);
   }
