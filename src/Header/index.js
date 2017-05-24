@@ -57,7 +57,7 @@ class Header extends PureComponent {
     const { error, errorMsg, _numOfPlayers, _numOfCards, optionsSubmitted } = this.state;
     const gameOptionsFormCards = classNames({
       'game-options-form cards': true,
-      disabled: !_numOfPlayers && !error
+      disabled: !_numOfPlayers || error
     });
     const submitDisabled = !_numOfPlayers || !_numOfCards || error ||optionsSubmitted;
     return (
