@@ -1,5 +1,4 @@
-This project requires NodeJs to be installed on your system, instructions on how to install it can be found here:
-https://nodejs.org/en/download/package-manager/
+This project requires [NodeJs](https://nodejs.org/en/) to be installed on your system.
 
 To run the project navigate to the project root via your terminal and run:
 
