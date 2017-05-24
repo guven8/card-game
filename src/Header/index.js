@@ -8,7 +8,7 @@ import './header.css';
 class Header extends PureComponent {
   constructor() {
     super();
-    this.state = { _numOfPlayers: 0, _numOfCards: 0, error: false, errorMsg: null, optionsSubmitted: false };
+    this.state = { _numOfPlayers: null, _numOfCards: null, error: false, errorMsg: null, optionsSubmitted: false };
   }
 
   componentWillMount() {
@@ -17,29 +17,26 @@ class Header extends PureComponent {
 
   updateNumOfPlayers = (e) => {
     this.setState({ error: false, errorMsg: null, optionsSubmitted: false});
-    const _numOfPlayers = e.target.value;
+    const _numOfPlayers = +e.target.value > 0 ? +e.target.value : 0;
     this.setState({ _numOfPlayers });
-
-    if (_numOfPlayers > 26) {
-      this.setState({ error: true, errorMsg: 'Maximum Amount of players is 26' });
-    } else if (_numOfPlayers < 2) {
-      this.setState({ error: true, errorMsg: 'Minimum Amount of players is 2' });
-    }
+    this.validateForm(_numOfPlayers, this.state._numOfCards);
   }
 
   updateNumOfCards = (e) => {
     this.setState({ error: false, errorMsg: null, optionsSubmitted: false});
     const { _numOfPlayers } = this.state;
     const _numOfCards = +e.target.value;
-    const maxCardsAvailable = Math.floor(52 / _numOfPlayers);
+    this.setState({ _numOfCards });
+    this.validateForm(_numOfPlayers, _numOfCards);
+  }
 
-    if (_numOfCards > maxCardsAvailable) {
+  validateForm = (numOfPlayers, numOfCards) => {
+    const maxCardsAvailable = Math.floor(52 / numOfPlayers);
+    if (numOfCards > maxCardsAvailable) {
       this.setState({
         error: true,
-        errorMsg: `Maximum number of cards available for ${_numOfPlayers} players is ${maxCardsAvailable}`
+        errorMsg: `Maximum number of cards available for ${numOfPlayers} players is ${maxCardsAvailable}`
       });
-    } else {
-      this.setState({ _numOfCards });
     }
   }
 
@@ -57,7 +54,7 @@ class Header extends PureComponent {
     const { error, errorMsg, _numOfPlayers, _numOfCards, optionsSubmitted } = this.state;
     const gameOptionsFormCards = classNames({
       'game-options-form cards': true,
-      disabled: !_numOfPlayers || error
+      disabled: !_numOfPlayers
     });
     const submitDisabled = !_numOfPlayers || !_numOfCards || error ||optionsSubmitted;
     return (
@@ -66,11 +63,11 @@ class Header extends PureComponent {
         <div className="input-options">
           <div className="game-options-form players">
             <label htmlFor="choose-players-input">Choose Number Of Players</label>
-            <input type="number" id="choose-players-input" onChange={this.updateNumOfPlayers}/>
+            <input type="number" id="choose-players-input" onChange={this.updateNumOfPlayers} min="2" max="26"/>
           </div>
           <div className={gameOptionsFormCards}>
             <label htmlFor="choose-cards-input">Choose Number Of Cards To Be Dealt</label>
-            <input type="number" id="choose-cards-input" onChange={this.updateNumOfCards}/>
+            <input type="number" id="choose-cards-input" onChange={this.updateNumOfCards} min="1" max="52"/>
           </div>
           <button
             disabled={submitDisabled}
