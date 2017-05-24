@@ -5,8 +5,13 @@ import { actions as cardDealer } from '../../cardDealer';
 import '../pokerTable.css';
 
 class PokerTable extends PureComponent {
+  componentWillMount() {
+    this.props.shuffleDeck();
+  }
+
   dealCards = () => {
     const { dealCards, deckOfCards, numOfPlayers, numOfCards } = this.props;
+    this.props.shuffleDeck();
     dealCards({
       deckOfCards,
       numOfPlayers,
@@ -26,9 +31,9 @@ class PokerTable extends PureComponent {
           <span className="title">
             {cardsDealt ? 'Play Again ?' : 'Ready ?'}
           </span>
-            <button className="deal-cards" onClick={this.dealCards}>
-              {cardsDealt ? 'Replay ?' : 'Deal Cards'}
-            </button>
+          <button className="deal-cards" onClick={this.dealCards}>
+            {cardsDealt ? 'Replay ?' : 'Deal Cards'}
+          </button>
         </div>
         <div className="card-container">
           {dealtCards.map((playersDeck, i) =>
@@ -53,5 +58,6 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
+  shuffleDeck: cardDealer.shuffleDeck,
   dealCards: cardDealer.dealCards
 })(PokerTable);
