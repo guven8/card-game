@@ -32,6 +32,14 @@ class Header extends PureComponent {
 
   validateForm = (numOfPlayers, numOfCards) => {
     const maxCardsAvailable = Math.floor(52 / numOfPlayers);
+    if (numOfPlayers > 26) {
+      this.setState({ error: true, errorMsg: 'Maximum Amount of players is 26'});
+    } else if (numOfPlayers < 2) {
+      this.setState({ error: true, errorMsg: 'Minimum Amount of players is 2'});
+    }
+    if (numOfCards > 52) {
+      this.setState({ error: true, errorMsg: 'Maximum Amount of cards available is is 52'});
+    }
     if (numOfCards > maxCardsAvailable) {
       this.setState({
         error: true,
