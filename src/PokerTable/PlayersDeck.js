@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
 import { isEqual } from 'lodash';
 import Card from './Card';
 
@@ -17,15 +16,15 @@ class PlayersDeck extends PureComponent {
   sortCards = (deck) => {
     const orderedSuits = [ 'hearts', 'spades', 'diamonds', 'clubs' ];
     const orderedDeck = deck.sort((a, b) =>
-      orderedSuits.indexOf(a.suit) > orderedSuits.indexOf(b.suit)
+      orderedSuits.indexOf(a.suit) - orderedSuits.indexOf(b.suit)
     )
     this.getPlayersCards(orderedDeck);
   }
 
   getPlayersCards = (deck) => {
-    let totalScore = 0;
+    let totalDeckValue = 0;
     const cards = deck.map(card => {
-      totalScore += card.value;
+      totalDeckValue += card.value;
       return (
         <Card
           key={card.id}
@@ -35,26 +34,26 @@ class PlayersDeck extends PureComponent {
         />
       )
     });
-    this.cards = cards
-    this.totalScore = totalScore;
+    this.cards = cards;
+    this.totalDeckValue = totalDeckValue;
   }
 
   render() {
-    const { playerNum, winner } = this.props;
+    const { playerNum, winner, draw, score, bonusPoints } = this.props;
     return (
       <div className="players-deck">
         <span className="player-num">Player: {playerNum}</span>
-        {winner === playerNum ? <span className="winner">Winner</span> : null }
-        <span className="total-score">Total Score: {this.totalScore}</span>
+        {winner && !draw ? <span className="winner">Winner!</span> : null }
+        {draw ? <span className="draw">Draw!</span> : null }
+        <div className="points-info">
+          <span>Card Points: {this.totalDeckValue}</span>
+          <span>Bonus Points: {bonusPoints}</span>
+          <span className="total-score">Total Score: {score}</span>
+        </div>
         {this.cards}
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  const { cardDealer: { winner } } = state;
-  return { winner };
-};
-
-export default connect(mapStateToProps)(PlayersDeck);
+export default PlayersDeck;

@@ -88,8 +88,8 @@
     left: 10px;
 }
 
+.poker-table .players-deck .draw,
 .poker-table .players-deck .winner {
-    color: lightgreen;
     font-size: 20px;
     font-weight: bold;
     position: absolute;
@@ -97,9 +97,19 @@
     right: 10px;
 }
 
-.poker-table .players-deck .total-score {
-    width: auto;
+.poker-table .players-deck .winner {
+    color: lightgreen;
+}
+
+.poker-table .players-deck .draw {
+    color: lightblue;
+}
+
+.poker-table .players-deck .points-info {
+    width: 100%;
     position: absolute;
-    bottom: 10px;
-    left: calc(50% - 50px);
+    bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }

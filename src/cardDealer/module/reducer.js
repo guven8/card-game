@@ -20,10 +20,12 @@ export default (state = initialState, action) => {
         ...state,
         dealtCards: action.dealtCards
       }
-    case a.GET_WINNER:
+    case a.GET_SCORES:
       return {
         ...state,
-        winner: action.winner
+        highestScores: action.highestScores,
+        scores: action.scores,
+        bonusPoints: action.bonusPoints
       }
     default:
       return state;

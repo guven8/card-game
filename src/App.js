@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import store from './store';
 import Header from './Header';
-import PokerTable from './PokerTable/components/index';
+import PokerTable from './PokerTable';
 import './App.css';
 
 class App extends Component {

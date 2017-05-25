@@ -1,5 +1,5 @@
 import * as a from './actionTypes';
-import { getDealtCards, determineWinner } from './utils';
+import { getDealtCards, getScores } from './utils';
 
 export const shuffleDeck = () => ({
   type: a.SHUFFLE_DECK
@@ -13,7 +13,7 @@ export const dealCards = ({deckOfCards, numOfPlayers, numOfCards} = {}) =>
       dealtCards
     });
     dispatch({
-      type: a.GET_WINNER,
-      winner: determineWinner(dealtCards)
+      type: a.GET_SCORES,
+      ...getScores(dealtCards)
     });
   };

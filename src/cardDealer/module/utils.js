@@ -26,16 +26,57 @@ export const getDealtCards = (cards, numOfPlayers, numOfCards) => {
   return chunk(cardsToBeDealt, numOfCards);
 };
 
-export const determineWinner = (dealtCards) => {
+export const getScores = (dealtCards) => {
   const playerPoints = [];
+  const cardCount = [];
+  const bonusPoints = [];
   dealtCards.forEach(card => {
     let points = 0;
+    let cardNums = [];
     for (let i = 0; i < card.length; i++) {
       points += +card[i].value;
+      cardNums.push(card[i].num);
     }
+    bonusPoints.push(0);
     playerPoints.push(points);
+    cardCount.push(countCards(cardNums));
+  });
+  cardCount.forEach((item, i) => {
+    Object.keys(item).map(c => {
+      if (item[c] > 1) {
+        if (item[c] === 2) {
+          playerPoints[i] += 10;
+          bonusPoints[i] += 10;
+        } else if (item[c] === 3) {
+          playerPoints[i] += 20;
+          bonusPoints[i] += 20;
+        } else if (item[c] === 4) {
+          playerPoints[i] += 40;
+          bonusPoints[i] += 40;
+        }
+      }
+      return null;
+    });
   });
   const highestPoints = Math.max.apply(Math, playerPoints);
-  const winner = playerPoints.indexOf(highestPoints);
-  return winner + 1;
+  const highestScores = playerPoints.filter(points => points === highestPoints);
+  const breakDown = {
+    highestScores,
+    bonusPoints,
+    scores: playerPoints
+  };
+  return breakDown;
 };
+
+const countCards = (cards) => {
+  const countedCards = cards.reduce((allCards, card) => {
+    if (card in allCards) {
+      allCards[card]++;
+    }
+    else {
+      allCards[card] = 1;
+    }
+    return allCards;
+  }, {});
+  return countedCards;
+}
