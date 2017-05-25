@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import { isEqual } from 'lodash';
 import Card from './Card';
 
@@ -56,4 +57,9 @@ class PlayersDeck extends PureComponent {
   }
 }
 
-export default PlayersDeck;
+const mapStateToProps = (state, ownProps) => {
+  const { scoreBreakdown } = state;
+  return { ...scoreBreakdown[`player${ownProps.playerNum}`] }
+}
+
+export default connect(mapStateToProps)(PlayersDeck);

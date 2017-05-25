@@ -1,5 +1,6 @@
 import * as a from './actionTypes';
-import { getDealtCards, getScores } from './utils';
+import { getDealtCards } from './utils';
+import { actions as scoreBreakdownActions } from '../../scoreBreakdown';
 
 export const shuffleDeck = () => ({
   type: a.SHUFFLE_DECK
@@ -12,8 +13,5 @@ export const dealCards = ({deckOfCards, numOfPlayers, numOfCards} = {}) =>
       type: a.DEAL_CARDS,
       dealtCards
     });
-    dispatch({
-      type: a.GET_SCORES,
-      ...getScores(dealtCards)
-    });
+    dispatch(scoreBreakdownActions.getScoreBreakdown({dealtCards}));
   };

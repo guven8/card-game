@@ -19,13 +19,6 @@ export default (state = initialState, action) => {
         ...state,
         dealtCards: action.dealtCards
       }
-    case a.GET_SCORES:
-      return {
-        ...state,
-        highestScores: action.highestScores,
-        scores: action.scores,
-        bonusPoints: action.bonusPoints
-      }
     default:
       return state;
   }

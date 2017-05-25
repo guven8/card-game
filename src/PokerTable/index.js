@@ -26,7 +26,6 @@ class PokerTable extends PureComponent {
       dealtCards,
       scores,
       highestScores,
-      bonusPoints
     } = this.props;
     if (!numOfPlayers || !numOfCards) {
       return null;
@@ -51,10 +50,8 @@ class PokerTable extends PureComponent {
                 key={i}
                 playerNum={i + 1}
                 playersDeck={playersDeck}
-                score={scores[i]}
                 winner={winner}
                 draw={draw}
-                bonusPoints={bonusPoints[i]}
               />
             )
           })}
@@ -69,9 +66,10 @@ const mapStateToProps = (state) => {
     cardDealer: {
       deckOfCards,
       dealtCards,
+    },
+    scoreBreakdown: {
       scores,
       highestScores,
-      bonusPoints
     },
     gameOptions: { numOfPlayers, numOfCards },
   } = state;
@@ -81,8 +79,7 @@ const mapStateToProps = (state) => {
     numOfPlayers,
     numOfCards,
     scores,
-    highestScores,
-    bonusPoints
+    highestScores
   };
 };
 
