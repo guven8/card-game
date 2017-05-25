@@ -4,8 +4,7 @@ import { getDeckOfCards } from './utils'
 
 const initialState = {
   deckOfCards: getDeckOfCards(),
-  dealtCards: [],
-  winner: null
+  dealtCards: []
 }
 
 export default (state = initialState, action) => {
