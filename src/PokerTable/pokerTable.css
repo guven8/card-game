@@ -72,14 +72,14 @@
     margin: 10px auto;
     border-radius: 5px;
     width: 100%;
-    max-width: 600px;
+    max-width: 550px;
     min-height: 400px;
     display: flex;
     flex-flow: row wrap;
     align-items: center;
     justify-content: center;
     position: relative;
-    padding: 23px;
+    padding: 30px;
 }
 
 .poker-table .players-deck .player-num {
