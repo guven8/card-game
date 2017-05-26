@@ -4,6 +4,12 @@ import classNames from 'classnames';
 import { actions as gameOptions } from '../gameOptions';
 import './header.css';
 
+/* The header component contains the inputs used to specify how many
+players there are and how many cards should be dealt, it validates
+the values it receives and prevents an impossible combination of
+players and cards from being set. If the values are valid and the
+submit button clicked it passes this information to the store. */
+
 class Header extends PureComponent {
   constructor() {
     super();

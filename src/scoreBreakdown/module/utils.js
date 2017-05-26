@@ -1,13 +1,19 @@
+/* The getScores function takes all the cards that were dealt in
+the form of an array containing an array for each players card hand,
+and returns an object containing the highestScores (array),
+scores (array) and scoreBreakdown (Object) which contains
+the scores and bonus points of each player */
+
 export const getScores = (dealtCards) => {
   const scores = [];
   const cardCount = [];
   const bonusPoints = [];
-  dealtCards.forEach(card => {
+  dealtCards.forEach(cardHand => {
     let points = 0;
     let cardNums = [];
-    for (let i = 0; i < card.length; i++) {
-      points += +card[i].value;
-      cardNums.push(card[i].num);
+    for (let i = 0; i < cardHand.length; i++) {
+      points += +cardHand[i].value;
+      cardNums.push(cardHand[i].num);
     }
     bonusPoints.push(0);
     scores.push(points);

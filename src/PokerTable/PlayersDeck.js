@@ -3,6 +3,19 @@ import { connect } from 'react-redux';
 import { isEqual } from 'lodash';
 import Card from './Card';
 
+/* PlayersDeck receives its scoreBreakdown from the
+redux connect function, it recieves its playersDeck,
+playerNum, winner and draw props from its parent component
+PokerTable. This component sorts the playersDeck by suit
+in the sortCards function which then passes the sortedDeck
+to getPlayerCards, which then renders a card for each card
+in the deck. The component will repeat this process when
+it receives a new playersDeck that is unequal to the current one.
+The PlayersDeck will also display the card points, bonus points,
+total score, player number and either "winner" or "draw".
+This component doesn't require any input from the user,
+it simply organises and renders the props it recieves. */
+
 class PlayersDeck extends PureComponent {
   componentWillReceiveProps(nextProps) {
     if (!isEqual(this.props.playersDeck, nextProps.playersDeck)) {

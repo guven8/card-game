@@ -4,6 +4,15 @@ import PlayersDeck from './PlayersDeck';
 import { actions as cardDealer } from '../cardDealer/index';
 import './pokerTable.css';
 
+/* The PokerTable component calls the shuffleDeck action before
+it mounts and each time dealCards is called. Calling dealCards
+will cause it to receive an array containing an array for the
+card hand of each player. This component doesn't render anything
+until the number of players and cards are set in the store.
+Initially the array of dealtCards is empty, once  the 'Deal cards'
+button is clicked, it renders a PlayersDeck for each card hand present
+in the array. */
+
 class PokerTable extends PureComponent {
   componentWillMount() {
     this.props.shuffleDeck();
