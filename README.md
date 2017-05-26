@@ -9,3 +9,5 @@ or
 `npm i && npm start`
 
 then point your browser to `http://localhost:3000`
+
+[Demo](https://guven8.github.io/card-game/)
